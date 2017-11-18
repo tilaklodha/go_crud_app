@@ -10,5 +10,6 @@ import (
 func Router() http.Handler {
 	router := mux.NewRouter()
 	router.HandleFunc("/ping", handler.PingHandler).Methods("GET")
+	router.HandleFunc("/user", handler.CreateUserHandler).Methods("POST")
 	return router
 }
