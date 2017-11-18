@@ -36,3 +36,11 @@ func GetAllUser() ([]domain.User, error) {
 	}
 	return user, nil
 }
+
+func DeleteUser(userId int) error {
+	err := repository.NewUserRepository().DeleteUser(userId)
+	if err != nil {
+		return err
+	}
+	return nil
+}

@@ -13,6 +13,7 @@ const (
 	insertQuery   = "INSERT INTO users (first_name, last_name, city, created_at) VALUES ($1, $2, $3, $4)"
 	fetchQuery    = "Select first_name, last_name, city from users where id = $1"
 	fetchAllQuery = "Select first_name, last_name, city from users"
+	deleteQuery   = "Delete from users where id = $1"
 )
 
 type userRepository struct {
@@ -60,4 +61,12 @@ func (ur *userRepository) GetAllUser() ([]domain.User, error) {
 		users = append(users, user)
 	}
 	return users, nil
+}
+func (ur *userRepository) DeleteUser(userId int) error {
+
+	_, err := ur.db.Exec(fmt.Sprintf(deleteQuery), userId)
+	if err != nil {
+		return err
+	}
+	return nil
 }
