@@ -44,3 +44,13 @@ func DeleteUser(userId int) error {
 	}
 	return nil
 }
+
+func UpdateUser(user *domain.User, userId int) (*domain.User, error) {
+	updateUser := &domain.User{}
+
+	updateUser, err := repository.NewUserRepository().UpdateUser(user, userId)
+	if err != nil {
+		return &domain.User{}, err
+	}
+	return updateUser, nil
+}

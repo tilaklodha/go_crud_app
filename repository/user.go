@@ -14,6 +14,7 @@ const (
 	fetchQuery    = "Select first_name, last_name, city from users where id = $1"
 	fetchAllQuery = "Select first_name, last_name, city from users"
 	deleteQuery   = "Delete from users where id = $1"
+	updateQuery   = "Update users SET first_name = $1, last_name = $2, city = $3 where id = $4"
 )
 
 type userRepository struct {
@@ -69,4 +70,19 @@ func (ur *userRepository) DeleteUser(userId int) error {
 		return err
 	}
 	return nil
+}
+
+func (ur *userRepository) UpdateUser(user *domain.User, userId int) (*domain.User, error) {
+	_, err := ur.db.Exec(updateQuery, user.FirstName, user.LastName, user.City, userId)
+	if err != nil {
+		fmt.Errorf("Error: %s", err)
+		return &domain.User{}, err
+	}
+	data := ur.db.QueryRow(fmt.Sprintf(fetchQuery), userId)
+	user = &domain.User{}
+	err = data.Scan(&user.FirstName, &user.LastName, &user.City)
+	if err != nil {
+		return &domain.User{}, err
+	}
+	return user, nil
 }
