@@ -12,5 +12,6 @@ func Router() http.Handler {
 	router.HandleFunc("/ping", handler.PingHandler).Methods("GET")
 	router.HandleFunc("/user", handler.CreateUserHandler).Methods("POST")
 	router.HandleFunc("/user/{id}", handler.GetUserHandler).Methods("GET")
+	router.HandleFunc("/user", handler.GetAllUserHandler).Methods("GET")
 	return router
 }
