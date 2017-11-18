@@ -5,12 +5,14 @@ import (
 	"crud-app/domain"
 	"database/sql"
 	"fmt"
+	"log"
 	"time"
 )
 
 const (
-	insertQuery = "INSERT INTO users (first_name, last_name, city, created_at) VALUES ($1, $2, $3, $4)"
-	fetchQuery  = "Select first_name, last_name, city from users where id = $1"
+	insertQuery   = "INSERT INTO users (first_name, last_name, city, created_at) VALUES ($1, $2, $3, $4)"
+	fetchQuery    = "Select first_name, last_name, city from users where id = $1"
+	fetchAllQuery = "Select first_name, last_name, city from users"
 )
 
 type userRepository struct {
@@ -40,4 +42,22 @@ func (ur *userRepository) GetUser(userId int) (*domain.User, error) {
 		return &domain.User{}, err
 	}
 	return &user, nil
+}
+
+func (ur *userRepository) GetAllUser() ([]domain.User, error) {
+	users := []domain.User{}
+	data, err := ur.db.Query(fmt.Sprintf(fetchAllQuery))
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer data.Close()
+	for data.Next() {
+		user := domain.User{}
+		err := data.Scan(&user.FirstName, &user.LastName, &user.City)
+		if err != nil {
+			user = domain.User{}
+		}
+		users = append(users, user)
+	}
+	return users, nil
 }

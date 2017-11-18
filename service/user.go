@@ -26,3 +26,13 @@ func GetUser(userId int) (*domain.User, error) {
 	}
 	return user, nil
 }
+
+func GetAllUser() ([]domain.User, error) {
+	user := []domain.User{}
+
+	user, err := repository.NewUserRepository().GetAllUser()
+	if err != nil {
+		return []domain.User{}, err
+	}
+	return user, nil
+}
