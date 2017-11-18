@@ -1,6 +1,8 @@
 package main
 
 import (
+	"crud-app/appcontext"
+	"crud-app/config"
 	"crud-app/server"
 	"log"
 	"net/http"
@@ -10,6 +12,9 @@ import (
 )
 
 func main() {
+	config.Load()
+	appcontext.Initiate()
+
 	clientApp := cli.NewApp()
 	clientApp.Name = "go-crud-app"
 	clientApp.Commands = []cli.Command{
