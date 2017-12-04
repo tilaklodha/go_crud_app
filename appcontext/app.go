@@ -1,8 +1,8 @@
 package appcontext
 
 import (
-	"crud-app/config"
 	sql "database/sql"
+	"go_crud_app/config"
 	"log"
 
 	_ "github.com/lib/pq"

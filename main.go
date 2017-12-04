@@ -1,9 +1,9 @@
 package main
 
 import (
-	"crud-app/appcontext"
-	"crud-app/config"
-	"crud-app/server"
+	"go_crud_app/appcontext"
+	"go_crud_app/config"
+	"go_crud_app/server"
 	"log"
 	"net/http"
 	"os"

@@ -1,9 +1,9 @@
 package service
 
 import (
-	"crud-app/domain"
-	"crud-app/repository"
 	"fmt"
+	"go_crud_app/domain"
+	"go_crud_app/repository"
 )
 
 func InsertUserData(user *domain.User) error {

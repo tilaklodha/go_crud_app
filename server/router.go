@@ -1,7 +1,7 @@
 package server
 
 import (
-	"crud-app/handler"
+	"go_crud_app/handler"
 	"net/http"
 
 	"github.com/gorilla/mux"

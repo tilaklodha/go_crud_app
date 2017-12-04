@@ -1,10 +1,10 @@
 package repository
 
 import (
-	"crud-app/appcontext"
-	"crud-app/domain"
 	"database/sql"
 	"fmt"
+	"go_crud_app/appcontext"
+	"go_crud_app/domain"
 	"log"
 	"time"
 )

@@ -1,4 +1,4 @@
-package: crud-app
+package: go_crud_app
 import:
   - package: "github.com/urfave/cli"
     version: ^v1.20.0

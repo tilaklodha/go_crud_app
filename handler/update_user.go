@@ -1,10 +1,10 @@
 package handler
 
 import (
-	"crud-app/domain"
-	"crud-app/service"
 	"encoding/json"
 	"fmt"
+	"go_crud_app/domain"
+	"go_crud_app/service"
 	"net/http"
 	"strconv"
 

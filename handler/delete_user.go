@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"crud-app/service"
+	"go_crud_app/service"
 	"net/http"
 	"strconv"
 
