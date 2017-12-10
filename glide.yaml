@@ -4,3 +4,9 @@ import:
     version: ^v1.20.0
   - package: "github.com/gorilla/mux"
     version: ^1.6.0
+  - package: "github.com/stretchr/testify"
+    version: 69483b4bd14f5845b5a1e55bca19e954e827f1d0
+  - package: "github.com/Sirupsen/logrus"
+    version: ^0.11.5
+  - package: "github.com/lib/pq"
+    version: 754f7301a3869c954007131ff116aec2e794ce36
