@@ -1,4 +1,4 @@
-all: build testdb.create test
+all: build testdb.create testdb.migrate test
 
 APP = go_crud_app
 DB_USER = "postgres"
@@ -20,6 +20,9 @@ testdb.create: testdb.drop
 
 testdb.drop:
 	dropdb --if-exists -U $(DB_USER) $(TEST_DB_NAME)
+
+testdb.migrate:
+	ENVIRONMENT=test $(APP_EXECUTABLE) migrate
 
 test:
 	ENVIRONMENT=test go test $(UNIT_TEST_PACKAGES) -p=1
