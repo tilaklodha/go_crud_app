@@ -57,6 +57,18 @@ func (suite *UserRepositoryTestSuite) TestGetAllUsers() {
 	suite.cleanUpDB()
 }
 
+func (suite *UserRepositoryTestSuite) TestDeletesUser() {
+	suite.repository.db.MustExec("ALTER SEQUENCE users_id_seq RESTART 1;")
+	userOne := domain.NewUser("abc", "xyz", "city")
+	err := suite.repository.InsertUser(userOne)
+	assert.Nil(suite.T(), err)
+	err = suite.repository.DeleteUser(1)
+	assert.Nil(suite.T(), err)
+	_, err = suite.repository.GetUser(1)
+	assert.NotNil(suite.T(), err)
+	suite.cleanUpDB()
+}
+
 func TestUserRepositorySuite(t *testing.T) {
 	suite.Run(t, new(UserRepositoryTestSuite))
 }
