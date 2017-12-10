@@ -1,12 +1,13 @@
 package repository
 
 import (
-	"database/sql"
 	"fmt"
 	"go_crud_app/appcontext"
 	"go_crud_app/domain"
 	"log"
 	"time"
+
+	"github.com/jmoiron/sqlx"
 )
 
 const (
@@ -18,7 +19,7 @@ const (
 )
 
 type userRepository struct {
-	db *sql.DB
+	db *sqlx.DB
 }
 
 func NewUserRepository() *userRepository {
