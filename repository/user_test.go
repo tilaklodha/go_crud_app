@@ -44,6 +44,19 @@ func (suite *UserRepositoryTestSuite) TestFailsGetUserWhenUserDoesNotExist() {
 	assert.NotNil(suite.T(), err)
 }
 
+func (suite *UserRepositoryTestSuite) TestGetAllUsers() {
+	userOne := domain.NewUser("abc", "xyz", "city")
+	userTwo := domain.NewUser("def", "uvw", "city")
+	errOne := suite.repository.InsertUser(userOne)
+	errTwo := suite.repository.InsertUser(userTwo)
+	assert.Nil(suite.T(), errOne)
+	assert.Nil(suite.T(), errTwo)
+	expectedUser := []domain.User{*userOne, *userTwo}
+	observedUser, _ := suite.repository.GetAllUser()
+	assert.Equal(suite.T(), expectedUser, observedUser)
+	suite.cleanUpDB()
+}
+
 func TestUserRepositorySuite(t *testing.T) {
 	suite.Run(t, new(UserRepositoryTestSuite))
 }
