@@ -69,6 +69,30 @@ func (suite *UserRepositoryTestSuite) TestDeletesUser() {
 	suite.cleanUpDB()
 }
 
+func (suite *UserRepositoryTestSuite) TestUpdateUser() {
+	suite.repository.db.MustExec("ALTER SEQUENCE users_id_seq RESTART 1;")
+	userOne := domain.NewUser("abc", "xyz", "city")
+	err := suite.repository.InsertUser(userOne)
+	assert.Nil(suite.T(), err)
+	userUpdated := domain.NewUser("abcd", "vxyz", "city")
+	updatedUser, err := suite.repository.UpdateUser(userUpdated, 1)
+	assert.Nil(suite.T(), err)
+	assert.Equal(suite.T(), updatedUser, userUpdated)
+	suite.cleanUpDB()
+}
+
+func (suite *UserRepositoryTestSuite) TestFailsToUpdateUser() {
+	suite.repository.db.MustExec("ALTER SEQUENCE users_id_seq RESTART 1;")
+	userOne := domain.NewUser("abc", "xyz", "city")
+	err := suite.repository.InsertUser(userOne)
+	assert.Nil(suite.T(), err)
+	userUpdated := domain.NewUser("abcd", "vxyz", "city")
+	updatedUser, err := suite.repository.UpdateUser(userUpdated, 2)
+	assert.NotNil(suite.T(), err)
+	assert.NotEqual(suite.T(), updatedUser, userUpdated)
+	suite.cleanUpDB()
+}
+
 func TestUserRepositorySuite(t *testing.T) {
 	suite.Run(t, new(UserRepositoryTestSuite))
 }
