@@ -3,6 +3,7 @@ package main
 import (
 	"go_crud_app/appcontext"
 	"go_crud_app/config"
+	"go_crud_app/migration"
 	"go_crud_app/server"
 	"log"
 	"net/http"
@@ -25,6 +26,20 @@ func main() {
 				router := server.Router()
 				log.Fatal(http.ListenAndServe(":8632", router))
 				return nil
+			},
+		},
+		{
+			Name:        "migrate",
+			Description: "Run Database Migrations",
+			Action: func(c *cli.Context) error {
+				return migration.RunDataBaseMigrations()
+			},
+		},
+		{
+			Name:        "rollback",
+			Description: "Rollback latest migrations",
+			Action: func(c *cli.Context) error {
+				return migration.RollBackLatestMigration()
 			},
 		},
 	}
