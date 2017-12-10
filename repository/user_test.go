@@ -18,7 +18,7 @@ type UserRepositoryTestSuite struct {
 func (suite *UserRepositoryTestSuite) SetupTest() {
 	config.Load()
 	appcontext.Initiate()
-	suite.repository = &userRepository{db: appcontext.GetDB()}
+	suite.repository = NewUserRepository()
 }
 
 func (suite *UserRepositoryTestSuite) TestInsertUser() {
