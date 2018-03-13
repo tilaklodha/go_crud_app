@@ -37,3 +37,8 @@ func TestCreateUserWithValidBody(t *testing.T) {
 
 	assert.Equal(t, http.StatusCreated, rr.Code)
 }
+
+func cleanUpDB() {
+	db := appcontext.GetDB()
+	db.MustExec("DELETE from users")
+}

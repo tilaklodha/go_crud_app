@@ -3,7 +3,7 @@ all: build testdb.create testdb.migrate test
 APP = go_crud_app
 DB_USER = "postgres"
 APP_EXECUTABLE = "./out/$(APP)"
-DB_NAME = "users"
+DB_NAME = "go_crud_app_dev"
 TEST_DB_NAME = "go_crud_app_test"
 UNIT_TEST_PACKAGES=$(shell glide novendor | grep -v "featuretests")
 
